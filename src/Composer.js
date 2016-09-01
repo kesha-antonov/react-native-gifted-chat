@@ -19,6 +19,7 @@ export default class Composer extends React.Component {
           height: this.props.composerHeight,
         }]}
         value={this.props.text}
+        accessibilityLabel={this.props.text || this.props.placeholder}
         enablesReturnKeyAutomatically={true}
         underlineColorAndroid="transparent"
         {...this.props.textInputProps}
@@ -45,7 +46,6 @@ const styles = StyleSheet.create({
 });
 
 Composer.defaultProps = {
-  textInputStyle: {},
   onChange: () => {},
   composerHeight: Platform.select({
     ios: 33,
@@ -56,10 +56,10 @@ Composer.defaultProps = {
   placeholderTextColor: '#b2b2b2',
   textInputProps: null,
   multiline: true,
+  textInputStyle: {},
 };
 
 Composer.propTypes = {
-  textInputStyle: React.PropTypes.object,
   onChange: React.PropTypes.func,
   composerHeight: React.PropTypes.number,
   text: React.PropTypes.string,
@@ -67,4 +67,5 @@ Composer.propTypes = {
   placeholderTextColor: React.PropTypes.string,
   textInputProps: React.PropTypes.object,
   multiline: React.PropTypes.bool,
+  textInputStyle: TextInput.propTypes.style,
 };

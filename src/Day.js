@@ -61,9 +61,6 @@ Day.contextTypes = {
 };
 
 Day.defaultProps = {
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
   isSameDay: () => {},
   currentMessage: {
     // TODO test if crash when createdAt === null
@@ -78,14 +75,17 @@ Day.defaultProps = {
     lastWeek: 'll',
     sameElse: 'll',
   },
+  containerStyle: {},
+  wrapperStyle: {},
+  textStyle: {},
 };
 
 Day.propTypes = {
-  containerStyle: React.PropTypes.object,
-  wrapperStyle: React.PropTypes.object,
-  textStyle: React.PropTypes.object,
   isSameDay: React.PropTypes.func,
   currentMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   dayFormat: React.PropTypes.object,
+  containerStyle: View.propTypes.style,
+  wrapperStyle: View.propTypes.style,
+  textStyle: Text.propTypes.style,
 };
