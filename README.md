@@ -107,6 +107,7 @@ See [example/App.js](example/App.js)
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
 - **`renderAvatar`** _(Function)_ - renders the message avatar
+- **`renderAvatarOnTop`** _(Bool)_ - render the message avatar, on top of consecutive messages. The default value is `false`.
 - **`renderBubble`** _(Function)_ - render the message bubble
 - **`renderMessage`** _(Function)_ - render the message container
 - **`renderMessageText`** _(Function)_ - render the message text
@@ -125,6 +126,7 @@ See [example/App.js](example/App.js)
 - **`onPressActionButton`** _(Function)_ - callback to perform custom logic when the Action button is pressed (the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
 - **`hideInputToolbar`** _(Bool)_ - disable render input toolbar. Default: false.
+- **`minInputToolbarHeight`** _(Integer)_ - minimum height of the input toolbar. The default value is `44`.
 - **`listViewProps`** _(Object)_ - extra props to be passed to the [`<ListView>`](https://facebook.github.io/react-native/docs/listview.html), some props can not be override, see the code in `render` method of `MessageContainer` for detail
 - **`keyboardShouldPersistTaps`** _(Enum)_ - determines when the keyboard should stay visible after a tap [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html)
 - **`onInputTextChanged`** _(Function)_ - function that will be called when input text changes
