@@ -513,7 +513,6 @@ GiftedChat.defaultProps = {
   bottomOffset: 0,
   minInputToolbarHeight: 44,
   isLoadingEarlier: false,
-  messageIdGenerator: () => uuid.v4()
   messageIdGenerator: () => uuid.v4(),
   maxInputLength: null
 };
