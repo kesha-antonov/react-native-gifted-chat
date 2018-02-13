@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import Color from './Color';
 
-const dayFormat = function({ context, dayFormat }) {
+const getDayFormat = function({ context, dayFormat }) {
   if( dayFormat ) {
     const locale = context.getLocale();
     return dayFormat[locale] || dayFormat;
@@ -16,7 +16,7 @@ const dayFormat = function({ context, dayFormat }) {
   }
 }
 
-  
+
 import { isSameDay, isSameUser, warnDeprecated } from './utils';
 import { DATE_FORMAT } from './Constant';
 
@@ -31,7 +31,7 @@ export default function Day(
           <Text style={[styles.text, textStyle]}>
             {moment(currentMessage.createdAt)
               .locale(context.getLocale())
-              .calendar(null, dayFormat({ context, dayFormat }))
+              .calendar(null, getDayFormat({ context, dayFormat }))
               .toUpperCase()}
           </Text>
         </View>
