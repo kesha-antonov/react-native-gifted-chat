@@ -1,42 +1,44 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ViewPropTypes,
-} from 'react-native';
-
+import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import moment from 'moment';
 
-import { isSameDay, isSameUser, warnDeprecated } from './utils';
+import Color from './Color';
 
-export default class Day extends React.Component {
-  dayFormat() {
-    if( this.props.dayFormat ) {
-      var locale = this.context.getLocale();
-      return this.props.dayFormat[locale] || this.props.dayFormat;
-    } else {
-      return null;
-    }
-  }
-
-  render() {
-    const { dateFormat } = this.props;
-
-    if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
-      return (
-        <View style={[styles.container, this.props.containerStyle]}>
-          <View style={[styles.wrapper, this.props.wrapperStyle]}>
-            <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).calendar(null, this.dayFormat()).toUpperCase()}
-            </Text>
-          </View>
-        </View>
-      );
-    }
+const dayFormat = function({ context, dayFormat }) {
+  if( dayFormat ) {
+    const locale = context.getLocale();
+    return dayFormat[locale] || dayFormat;
+  } else {
     return null;
   }
+}
+
+  
+import { isSameDay, isSameUser, warnDeprecated } from './utils';
+import { DATE_FORMAT } from './Constant';
+
+export default function Day(
+  { dateFormat, currentMessage, previousMessage, containerStyle, wrapperStyle, textStyle, dayFormat },
+  context,
+) {
+  if (!isSameDay(currentMessage, previousMessage)) {
+    return (
+      <View style={[styles.container, containerStyle]}>
+        <View style={wrapperStyle}>
+          <Text style={[styles.text, textStyle]}>
+            {moment(currentMessage.createdAt)
+              .locale(context.getLocale())
+              .calendar(null, dayFormat({ context, dayFormat }))
+              .toUpperCase()}
+          </Text>
+        </View>
+      </View>
+    );
+  }
+  return null;
 }
 
 const styles = StyleSheet.create({
@@ -46,17 +48,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 10,
   },
-  wrapper: {
-    // backgroundColor: '#ccc',
-    // borderRadius: 10,
-    // paddingLeft: 10,
-    // paddingRight: 10,
-    // paddingTop: 5,
-    // paddingBottom: 5,
-  },
   text: {
-    backgroundColor: 'transparent',
-    color: '#b2b2b2',
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.defaultColor,
     fontSize: 12,
     fontWeight: '600',
   },
@@ -68,7 +62,7 @@ Day.contextTypes = {
 
 Day.defaultProps = {
   currentMessage: {
-    // TODO test if crash when createdAt === null
+    // TODO: test if crash when createdAt === null
     createdAt: null,
   },
   previousMessage: {},
@@ -83,9 +77,10 @@ Day.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
-  //TODO: remove in next major release
+  // TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),
+  dateFormat: DATE_FORMAT,
 };
 
 Day.propTypes = {
@@ -95,7 +90,7 @@ Day.propTypes = {
   containerStyle: ViewPropTypes.style,
   wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
-  //TODO: remove in next major release
+  // TODO: remove in next major release
   isSameDay: PropTypes.func,
   isSameUser: PropTypes.func,
   dateFormat: PropTypes.string,
