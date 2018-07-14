@@ -32,6 +32,9 @@ export default class Composer extends React.Component {
   render() {
     return (
       <TextInput
+        testID={this.props.placeholder}
+        accessible
+        accessibilityLabel={this.props.placeholder}
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
@@ -41,9 +44,9 @@ export default class Composer extends React.Component {
         style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
         autoFocus={this.props.textInputAutoFocus}
         value={this.props.text}
-        accessibilityLabel={this.props.text || this.props.placeholder}
         enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
+        keyboardAppearance={this.props.keyboardAppearance}
         {...this.props.textInputProps}
       />
     );
@@ -77,8 +80,9 @@ Composer.defaultProps = {
   multiline: true,
   textInputStyle: {},
   textInputAutoFocus: false,
-  onTextChanged: () => { },
-  onInputSizeChanged: () => { },
+  keyboardAppearance: 'default',
+  onTextChanged: () => {},
+  onInputSizeChanged: () => {},
 };
 
 Composer.propTypes = {
@@ -92,4 +96,5 @@ Composer.propTypes = {
   multiline: PropTypes.bool,
   textInputStyle: TextInput.propTypes.style,
   textInputAutoFocus: PropTypes.bool,
+  keyboardAppearance: PropTypes.string,
 };
