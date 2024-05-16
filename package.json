@@ -4,6 +4,10 @@
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
